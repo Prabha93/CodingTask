@@ -56,10 +56,10 @@ namespace CodingAssessment.Refactor
                     // Adds new people to the list
                     _people.Add(new People(name, DateTime.UtcNow.Subtract(new TimeSpan(random.Next(18, 85) * 356, 0, 0, 0))));
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
                     // Dont think this should ever happen
-                    throw new Exception("Something failed in user creation");
+                    throw new Exception("Something failed in user creation"+ex.Message);
                 }
             }
             return _people;
@@ -73,13 +73,16 @@ namespace CodingAssessment.Refactor
         public string GetMarried(People p, string lastName)
         {
             if (lastName.Contains("test"))
+            {
                 return p.Name;
-            if ((p.Name.Length + lastName).Length > 255)
+            }
+            else if ((p.Name.Length + lastName).Length > 255)
             {
                 (p.Name + " " + lastName).Substring(0, 255);
+                return p.Name + " " + lastName;
             }
 
-            return p.Name + " " + lastName;
+            return string.Empty;
         }
     }
 }
