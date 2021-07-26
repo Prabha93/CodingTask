@@ -10,10 +10,14 @@ namespace Utility.Valocity.ProfileHelper
      public string Name { get; private set; }
      public DateTimeOffset DOB { get; private set; }
      public People(string name) : this(name, Under16.Date) { }
-     public People(string name, DateTime dob) {
+
+     public People(string name, DateTime dob) 
+     {
          Name = name;
          DOB = dob;
-     }}
+     }
+
+    }
 
     public class BirthingUnit
     {
@@ -38,7 +42,7 @@ namespace Utility.Valocity.ProfileHelper
             {
                 try
                 {
-                    // Creates a dandon Name
+                    // Creates a Random Name
                     string name = string.Empty;
                     var random = new Random();
                     if (random.Next(0, 1) == 0) {
@@ -50,10 +54,11 @@ namespace Utility.Valocity.ProfileHelper
                     // Adds new people to the list
                     _people.Add(new People(name, DateTime.UtcNow.Subtract(new TimeSpan(random.Next(18, 85) * 356, 0, 0, 0))));
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
                     // Dont think this should ever happen
-                    throw new Exception("Something failed in user creation");
+                    //Making sure we return proper message/exception
+                    throw new Exception("Something failed in user creation"+ex.Message);
                 }
             }
             return _people;
@@ -66,14 +71,16 @@ namespace Utility.Valocity.ProfileHelper
 
         public string GetMarried(People p, string lastName)
         {
+            //Making sure the conditions are definite 
             if (lastName.Contains("test"))
+            {
                 return p.Name;
-            if ((p.Name.Length + lastName).Length > 255)
+            }
+            else if ((p.Name.Length + lastName).Length > 255)
             {
                 (p.Name + " " + lastName).Substring(0, 255);
-            }
-
-            return p.Name + " " + lastName;
+                return p.Name + " " + lastName;
+            }            
         }
     }
 }
