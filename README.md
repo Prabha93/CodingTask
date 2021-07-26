@@ -55,6 +55,8 @@ Constraints:
 At this stage I know I need a concept of a Deck, Cards and a Shuffle function.
 
 How would you setup your new solution and why? 
+--> New solution to maintain transparency with current project and others.
+--> Will help to debug the separately and easily
 
 - Show me your initial to do list with some reasoning, for example:
   - Development environment setup
